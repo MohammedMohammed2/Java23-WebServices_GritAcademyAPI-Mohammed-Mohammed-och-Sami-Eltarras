@@ -1,4 +1,4 @@
-package com.gritacademyAPI.Studenter;
+package com.gritacademyAPI.studenter;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,4 +23,5 @@ public class Students {
 
     @Column(name = "town")
     private String town;
+
 }

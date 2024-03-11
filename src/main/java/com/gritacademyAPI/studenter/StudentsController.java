@@ -1,7 +1,8 @@
-package com.gritacademyAPI.Studenter;
+package com.gritacademyAPI.studenter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +15,15 @@ public class StudentsController {
     @Autowired
     StudentsServices studentsServices;
 
-
     @GetMapping
-    List<Students> getstudents(){
+    public List<Students> getStudents(){
         return studentsServices.getStudents();
     }
 
-    @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    List<Students> getStudentById(
-            @PathVariable(value = "id")Long id){
-        return studentsServices.getStudents();
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Students> getStudentById(
+            @PathVariable(value = "id")Long id
+    ){
+        return studentsServices.getStudentById(id);
     }
 }

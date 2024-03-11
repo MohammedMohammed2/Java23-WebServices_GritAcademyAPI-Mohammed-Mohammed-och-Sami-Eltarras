@@ -1,4 +1,4 @@
-package com.gritacademyAPI.Student_Courses;
+package com.gritacademyAPI.studentcourses;
 
 public interface StudentCoursesRepository {
 }
