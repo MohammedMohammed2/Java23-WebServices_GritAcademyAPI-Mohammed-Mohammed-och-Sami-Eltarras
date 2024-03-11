@@ -25,7 +25,7 @@ public class CoursesServices {
         }
         return ResponseEntity.ok(courses.get());
     }
-    public ResponseEntity<List<Courses>> getstudentsByName(String name) {
+    public ResponseEntity<List<Courses>> getStudentsByName(String name) {
         List<Courses> courses = coursesRepository.findStudentsByName(name);
         if (courses.isEmpty()){
             throw new RuntimeException("Student not found");

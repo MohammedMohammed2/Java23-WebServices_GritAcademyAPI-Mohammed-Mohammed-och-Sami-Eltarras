@@ -31,7 +31,7 @@ public class Courses {
 
 
     @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
+
     private Set<Students> students = new HashSet<>();
 
 

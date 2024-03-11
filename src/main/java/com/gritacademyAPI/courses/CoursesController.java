@@ -33,7 +33,7 @@ public class CoursesController {
     public ResponseEntity<List<Courses>> getStudentsByName (
             @PathVariable(value = "name")String name
     ){
-        return coursesServices.getstudentsByName(name);
+        return coursesServices.getStudentsByName(name);
     }
 
 
