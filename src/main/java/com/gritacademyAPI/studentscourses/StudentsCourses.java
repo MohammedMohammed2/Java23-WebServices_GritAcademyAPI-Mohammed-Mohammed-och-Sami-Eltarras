@@ -1,12 +1,12 @@
-package com.gritacademyAPI.studentcourses;
+package com.gritacademyAPI.studentscourses;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity(name = "student_courses")
+@Entity(name = "studentscourses")
 @Table(name = "students_courses")
 @Data
-public class StudentCourses {
+public class StudentsCourses {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
