@@ -1,5 +1,7 @@
 package com.gritacademyAPI.courses;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gritacademyAPI.studenter.Students;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,10 +30,10 @@ public class Courses {
     private  String description;
 
 
-   /* @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "courses", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Students> students = new HashSet<>();
 
-    */
+
 
 }
