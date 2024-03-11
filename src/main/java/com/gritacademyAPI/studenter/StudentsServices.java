@@ -23,10 +23,6 @@ public class StudentsServices{
 
     }
 
-
-
-
-
     public ResponseEntity<List<Students>> getCoursesByfName(String fName) {
         List<Students> students = studentsRepository.findCoursesByfName(fName);
         if (students.isEmpty()){
@@ -34,6 +30,22 @@ public class StudentsServices{
         }
         return ResponseEntity.ok(studentsRepository.findCoursesByfName(fName));
 
+    }
+
+    public ResponseEntity<List<Students>> getCoursesBylName(String lName) {
+        List<Students> students = studentsRepository.findCoursesBylName(lName);
+        if (students.isEmpty()){
+            throw new RuntimeException("Student not found");
+        }
+        return ResponseEntity.ok(studentsRepository.findCoursesBylName(lName));
+
+    }
+    public ResponseEntity<List<Students>> getCoursesByTown(String town) {
+        List<Students> students = studentsRepository.findCoursesByTown(town);
+        if (students.isEmpty()){
+            throw new RuntimeException("Student not found");
+        }
+        return ResponseEntity.ok(studentsRepository.findCoursesByTown(town));
     }
 
     }

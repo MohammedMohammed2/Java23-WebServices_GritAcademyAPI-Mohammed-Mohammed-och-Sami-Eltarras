@@ -12,9 +12,6 @@ public class StudentsController {
     @Autowired
     StudentsServices studentsServices;
 
-    @Autowired
-    StudentsRepository studentsRepository;
-
     @GetMapping
     public List<Students> getStudents(){
         return studentsServices.getStudents();
@@ -28,11 +25,25 @@ public class StudentsController {
     }
 
 
-    @GetMapping(value = "name/{fName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "search/{fName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Students>> getCoursesByfName (
             @PathVariable(value = "fName")String fName
     ){
         return studentsServices.getCoursesByfName(fName);
+    }
+
+    @GetMapping(value = "search/lastname/{lName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Students>> getCoursesBylName (
+            @PathVariable(value = "lName")String lName
+    ){
+        return studentsServices.getCoursesBylName(lName);
+    }
+
+    @GetMapping(value = "search/town/{town}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Students>> getCoursesTown (
+            @PathVariable(value = "town")String Town
+    ){
+        return studentsServices.getCoursesByTown(Town);
     }
 
 }
