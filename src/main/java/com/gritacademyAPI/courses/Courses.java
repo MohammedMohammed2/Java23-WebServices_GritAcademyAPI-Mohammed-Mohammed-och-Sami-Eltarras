@@ -1,7 +1,5 @@
 package com.gritacademyAPI.courses;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gritacademyAPI.studenter.Students;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -17,8 +17,7 @@ public class CoursesController {
     @Autowired
     CoursesServices coursesServices;
 
-    @Autowired
-    CoursesRepository coursesRepository;
+
 
     @GetMapping
     List<Courses>getcourses(){ return coursesServices.getCourses();}
@@ -27,7 +26,7 @@ public class CoursesController {
     public ResponseEntity<Courses> getCourseById(
             @PathVariable(value = "id") Long id
     ){
-        return getCourseById(id);
+        return coursesServices.getCourseById(id);
     }
 
 
