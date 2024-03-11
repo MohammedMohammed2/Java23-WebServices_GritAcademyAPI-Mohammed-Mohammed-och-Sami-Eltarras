@@ -20,17 +20,15 @@ public class StudentsController {
         return studentsServices.getStudents();
     }
 
- /*   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Students> getStudentById(
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Students>getStudentById(
             @PathVariable(value = "id")Long id
     ){
         return studentsServices.getStudentById(id);
     }
 
-  */
 
-
-    @GetMapping(value = "/{fName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "name/{fName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Students>> getCoursesByfName (
             @PathVariable(value = "fName")String fName
     ){

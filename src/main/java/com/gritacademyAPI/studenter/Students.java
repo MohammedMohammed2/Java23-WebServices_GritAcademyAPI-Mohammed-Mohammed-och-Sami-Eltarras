@@ -29,6 +29,8 @@ public class Students {
     @Column(name = "town")
     private String town;
 
+
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "students_courses",

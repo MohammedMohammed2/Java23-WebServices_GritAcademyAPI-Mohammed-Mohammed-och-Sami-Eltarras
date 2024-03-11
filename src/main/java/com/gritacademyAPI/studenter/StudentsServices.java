@@ -14,7 +14,7 @@ public class StudentsServices{
 
     List<Students> getStudents(){return studentsRepository.findAll();}
 
- /*   public ResponseEntity<Students>getStudentById(Long id) {
+   public ResponseEntity<Students>getStudentById(Long id) {
         Optional<Students> students = studentsRepository.findById(id);
         if (students.isEmpty()){
             throw new RuntimeException("Student not found");
@@ -23,7 +23,7 @@ public class StudentsServices{
 
     }
 
-  */
+
 
 
 
