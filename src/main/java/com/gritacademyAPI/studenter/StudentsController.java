@@ -14,9 +14,10 @@ public class StudentsController {
     StudentsServices studentsServices;
     
     @GetMapping(value = "/students")
-    public List<Students> allStudents() {
+    public List<StudentsDTO> allStudents() {
 
-        return studentsServices.allStudents();
+        return studentsServices.getallStudents();
+
     }
 
     @GetMapping(value = "/studentsassociations", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,17 +35,19 @@ public class StudentsController {
     }
 
     @GetMapping(value = "search/{fName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Students>> getCoursesByfName (
+    public ResponseEntity<List<StudentsDTO>> getCoursesByfName (
             @PathVariable(value = "fName")String fName
     ){
-        return studentsServices.getCoursesByfName(fName);
+        List<StudentsDTO> studentsDTOS = studentsServices.getCoursesbyfName(fName);
+        return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "search/lastname/{lName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Students>> getCoursesBylName (
+    public ResponseEntity<List<StudentsDTO>> getCoursesBylName (
             @PathVariable(value = "lName")String lName
     ){
-        return studentsServices.getCoursesBylName(lName);
+        List<StudentsDTO> studentsDTOS = studentsServices.getCoursesbylName(lName);
+        return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "search/town/{town}", produces = MediaType.APPLICATION_JSON_VALUE)
