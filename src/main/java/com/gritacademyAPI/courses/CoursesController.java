@@ -1,5 +1,6 @@
 package com.gritacademyAPI.courses;
 
+import com.gritacademyAPI.studenter.Students;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,12 @@ public class CoursesController {
             @PathVariable(value = "id") Long id
     ){
         return coursesServices.getCourseById(id);
+    }
+    @GetMapping(value = "search/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Courses>> getStudentsByName (
+            @PathVariable(value = "name")String name
+    ){
+        return coursesServices.getstudentsByName(name);
     }
 
 
