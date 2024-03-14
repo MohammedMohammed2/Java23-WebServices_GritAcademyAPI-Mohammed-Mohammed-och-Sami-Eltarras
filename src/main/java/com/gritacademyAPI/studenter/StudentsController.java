@@ -1,6 +1,7 @@
 package com.gritacademyAPI.studenter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.mapping.TableOwner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -51,10 +52,10 @@ public class StudentsController {
     }
 
     @GetMapping(value = "search/town/{town}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Students>> getCoursesTown (
-            @PathVariable(value = "town")String Town
+    public ResponseEntity<List<StudentsDTO>> getCoursesTown (
+            @PathVariable(value = "town")String town
     ){
-        return studentsServices.getCoursesByTown(Town);
+                List<StudentsDTO> studentsDTOS = studentsServices.getCoursesByTown(town);
+                return new ResponseEntity<>(studentsDTOS,HttpStatus.OK);
     }
-
 }

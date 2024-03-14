@@ -3,7 +3,6 @@ package com.gritacademyAPI.studenter;
 import com.gritacademyAPI.courses.Courses;
 import com.gritacademyAPI.courses.CoursesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,19 +15,15 @@ public class StudentsServices {
     @Autowired
     StudentsRepository studentsRepository;
 
-
+    public List<StudentsDTO> getStudents() {
+        List<StudentsDTO> studentsDTO = new ArrayList<>();
+        studentsRepository.findAll().forEach(students -> studentsDTO.add(this.mapToDTO(students)));
+        return studentsDTO;
+    }
 
     public List<StudentsDTO> getallStudents() {
         List<StudentsDTO> studentsDTO = new ArrayList<>();
         studentsRepository.findAll().forEach(students -> studentsDTO.add(this.mapsToDTO(students)));
-        return studentsDTO;
-    }
-
-
-
-    public List<StudentsDTO> getStudents() {
-        List<StudentsDTO> studentsDTO = new ArrayList<>();
-        studentsRepository.findAll().forEach(students -> studentsDTO.add(this.mapToDTO(students)));
         return studentsDTO;
     }
 
@@ -62,24 +57,16 @@ public class StudentsServices {
                 .collect(Collectors.toList());
     }
 
-
-
- /*   public ResponseEntity<List<Students>> getCoursesByfName(String fName) {
-        List<Students> students = studentsRepository.findCoursesByfName(fName);
-        if (students.isEmpty()){
-            throw new RuntimeException("Student not found");
-        }
-        return ResponseEntity.ok(studentsRepository.findCoursesByfName(fName));
-
-    }*/
-
-    public ResponseEntity<List<Students>> getCoursesByTown(String town) {
-        List<Students> students = studentsRepository.findCoursesByTown(town);
-        if (students.isEmpty()){
-            throw new RuntimeException("Student not found");
-        }
-        return ResponseEntity.ok(studentsRepository.findCoursesByTown(town));
+    public List<StudentsDTO> getCoursesByTown(String town) {
+        Optional<Students> students = studentsRepository.findCoursesByTown(town).map(student -> {
+            student.getCourses().size();
+            return student;
+        });
+        return students.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
+
 
     private CoursesDTO mapToDTO(Courses courses){
         CoursesDTO dto = new CoursesDTO();
@@ -110,7 +97,5 @@ public class StudentsServices {
         dto.setTown(students.getTown());
         return dto;
     }
-
-
 }
 
