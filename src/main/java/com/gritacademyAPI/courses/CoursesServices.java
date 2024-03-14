@@ -19,7 +19,7 @@ public class CoursesServices {
 
   public List<CoursesDTO> getAllCourses(){
 
-      return coursesRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+      return coursesRepository.findAll().stream().map(this::mapsToDTO).collect(Collectors.toList());
   }
     public List<CoursesDTO> getCourseById(Long id) {
 
@@ -32,16 +32,6 @@ public class CoursesServices {
                 .collect(Collectors.toList());
 
     }
-    public List<CoursesDTO> getStudentsByCourseName(String name) {
-        Optional<Courses> courses = coursesRepository.findByNameContaining(name).map(course -> {
-            course.getStudents().size();
-            return course;
-        });
-        return courses.stream()
-                .map(this::mapToDTO)
-                .collect(Collectors.toList());
-    }
-
     public List<CoursesDTO> getStudentsByCourseFullName(String name) {
         Optional<Courses> courses = coursesRepository.findStudentsByName(name).map(course -> {
             course.getStudents().size();
@@ -51,16 +41,22 @@ public class CoursesServices {
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
+    public List<CoursesDTO> getStudentsByCourseName(String name) {
+        Optional<Courses> courses = coursesRepository.findByNameContaining(name);
+        return courses.stream()
+                .map(this::mapsToDTO)
+                .collect(Collectors.toList());
+        }
 
       public List<CoursesDTO> getStudentsByCourseDescription(String description) {
-        Optional<Courses> courses = coursesRepository.findByDescriptionContaining(description).map(course -> {
-            course.getStudents().size();
-            return course;
-        });
-        return courses.stream()
-                .map(this::mapToDTO)
-                .collect(Collectors.toList());
-    }
+        Optional<Courses> courses = coursesRepository.findByDescriptionContaining(description);
+          return courses.stream()
+                  .map(this::mapsToDTO)
+                  .collect(Collectors.toList());
+        }
+
+
+
 
     private StudentsDTO mapToDTO(Students students){
         StudentsDTO dto = new StudentsDTO();
@@ -69,7 +65,6 @@ public class CoursesServices {
         dto.setLName(students.getLName());
         dto.setTown(students.getTown());
         return dto;
-
     }
 
     private CoursesDTO mapToDTO (Courses courses) {
@@ -83,5 +78,12 @@ public class CoursesServices {
                 .collect(Collectors.toList()));
         return dto;
     }
+    private CoursesDTO mapsToDTO (Courses courses) {
+        CoursesDTO dto = new CoursesDTO();
+        dto.setId(courses.getId());
+        dto.setName(courses.getName());
+        dto.setDescription(courses.getDescription());
 
+        return dto;
+    }
 }

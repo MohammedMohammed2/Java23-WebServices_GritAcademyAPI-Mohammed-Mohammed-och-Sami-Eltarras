@@ -17,7 +17,7 @@ public class StudentsServices {
 
     public List<StudentsDTO> getStudents() {
         List<StudentsDTO> studentsDTO = new ArrayList<>();
-        studentsRepository.findAll().forEach(students -> studentsDTO.add(this.mapToDTO(students)));
+        studentsRepository.findAll().forEach(students -> studentsDTO.add(this.mapsToDTO(students)));
         return studentsDTO;
     }
 

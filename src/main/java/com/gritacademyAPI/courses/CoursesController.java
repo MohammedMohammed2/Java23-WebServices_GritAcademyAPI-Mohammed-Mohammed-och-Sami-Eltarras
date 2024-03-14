@@ -2,6 +2,7 @@ package com.gritacademyAPI.courses;
 
 import com.gritacademyAPI.studenter.Students;
 import com.gritacademyAPI.studenter.StudentsDTO;
+import com.gritacademyAPI.studenter.StudentsServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,8 +20,6 @@ public class CoursesController {
     @Autowired
     CoursesServices coursesServices;
 
-
-
     @GetMapping(value = "/courses")
     public List<CoursesDTO> courses(){
         return coursesServices.getAllCourses();
@@ -34,16 +33,15 @@ public class CoursesController {
         return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "courses/fullCname/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "courses/courseName/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getStudentsByCourseFullName (
-            @PathVariable(value = "name")String name
+            @PathVariable(value = "name") String name
     ){
-        List<CoursesDTO> coursesDTOS = coursesServices.getStudentsByCourseName(name);
+        List<CoursesDTO> coursesDTOS = coursesServices.getStudentsByCourseFullName(name);
         return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
 
-
-    @GetMapping(value = "courses/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "courses/search/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getStudentsByCourseName (
             @PathVariable(value = "name")String name
     ){
@@ -53,12 +51,9 @@ public class CoursesController {
 
     @GetMapping(value = "courses/desc/{description}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getStudentsByCourseDescription (
-            @PathVariable(value = "description")String description
+            @PathVariable(value = "description") String description
     ){
         List<CoursesDTO> coursesDTOS = coursesServices.getStudentsByCourseDescription(description);
         return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
-
-
-
 }

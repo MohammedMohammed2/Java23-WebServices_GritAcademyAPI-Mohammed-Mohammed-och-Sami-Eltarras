@@ -18,10 +18,9 @@ public class StudentsController {
     public List<StudentsDTO> allStudents() {
 
         return studentsServices.getStudents();
-
     }
 
-    @GetMapping(value = "/studentsassociations", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/studentsCourses", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity <List<StudentsDTO>> students(){
         List<StudentsDTO> allStudents = studentsServices.getStudents();
         return new ResponseEntity<>(allStudents, HttpStatus.OK);
@@ -35,7 +34,7 @@ public class StudentsController {
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "search/{fName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "students/fName/{fName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsDTO>> getCoursesByfName (
             @PathVariable(value = "fName")String fName
     ){
@@ -43,7 +42,7 @@ public class StudentsController {
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "search/lastname/{lName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "students/lName/{lName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsDTO>> getCoursesBylName (
             @PathVariable(value = "lName")String lName
     ){
@@ -51,7 +50,7 @@ public class StudentsController {
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "search/town/{town}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "students/town/{town}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsDTO>> getCoursesTown (
             @PathVariable(value = "town")String town
     ){
