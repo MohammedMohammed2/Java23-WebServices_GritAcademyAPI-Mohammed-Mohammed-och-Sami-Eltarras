@@ -34,7 +34,7 @@ public class StudentsController {
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "students/fName/{fName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/students/fName/{fName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsDTO>> getCoursesByfName (
             @PathVariable(value = "fName")String fName
     ){
@@ -42,7 +42,7 @@ public class StudentsController {
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "students/lName/{lName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/students/lName/{lName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsDTO>> getCoursesBylName (
             @PathVariable(value = "lName")String lName
     ){
@@ -50,7 +50,7 @@ public class StudentsController {
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "students/town/{town}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/students/town/{town}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<StudentsDTO>> getCoursesTown (
             @PathVariable(value = "town")String town
     ){

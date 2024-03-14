@@ -25,7 +25,7 @@ public class CoursesController {
         return coursesServices.getAllCourses();
     }
 
-    @GetMapping(value = "courses/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/courses/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getCourseById(
             @PathVariable(value = "id") Long id
     ){
@@ -33,7 +33,7 @@ public class CoursesController {
         return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "courses/courseName/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/courses/courseName/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getStudentsByCourseFullName (
             @PathVariable(value = "name") String name
     ){
@@ -41,7 +41,7 @@ public class CoursesController {
         return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "courses/search/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/courses/search/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getStudentsByCourseName (
             @PathVariable(value = "name")String name
     ){
@@ -49,7 +49,7 @@ public class CoursesController {
         return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
 
-    @GetMapping(value = "courses/desc/{description}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/courses/desc/{description}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getStudentsByCourseDescription (
             @PathVariable(value = "description") String description
     ){
