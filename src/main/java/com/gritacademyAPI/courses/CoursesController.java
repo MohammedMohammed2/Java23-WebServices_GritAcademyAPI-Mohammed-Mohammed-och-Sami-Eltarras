@@ -1,7 +1,9 @@
 package com.gritacademyAPI.courses;
 
 import com.gritacademyAPI.studenter.Students;
+import com.gritacademyAPI.studenter.StudentsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/courses")
 public class CoursesController {
 
     @Autowired
@@ -20,7 +21,7 @@ public class CoursesController {
 
 
 
-    @GetMapping
+    @GetMapping(value = "/courses")
     List<Courses>getcourses(){ return coursesServices.getCourses();}
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -29,11 +30,21 @@ public class CoursesController {
     ){
         return coursesServices.getCourseById(id);
     }
-    @GetMapping(value = "search/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Courses>> getStudentsByName (
+
+    @GetMapping(value = "courses/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CoursesDTO>> getStudentsByCourseName (
             @PathVariable(value = "name")String name
     ){
-        return coursesServices.getStudentsByName(name);
+        List<CoursesDTO> coursesDTOS = coursesServices.getStudentsByCourseName(name);
+        return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "courses/desc/{description}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CoursesDTO>> getStudentsByCourseDescription (
+            @PathVariable(value = "description")String description
+    ){
+        List<CoursesDTO> coursesDTOS = coursesServices.getStudentsByCourseDescription(description);
+        return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
 
 
