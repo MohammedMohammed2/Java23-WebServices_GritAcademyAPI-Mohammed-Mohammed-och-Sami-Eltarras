@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,10 +17,10 @@ public class CoursesServices {
     @Autowired
     CoursesRepository coursesRepository;
 
-    List<Courses> getCourses() {
-        return coursesRepository.findAll();
-    }
+  public List<CoursesDTO> getAllCourses(){
 
+      return coursesRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+  }
     public ResponseEntity<Courses> getCourseById(Long id) {
         Optional<Courses> courses = coursesRepository.findById(id);
         if (courses.isEmpty()) {

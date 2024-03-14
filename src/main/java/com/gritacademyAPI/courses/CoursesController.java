@@ -22,7 +22,8 @@ public class CoursesController {
 
 
     @GetMapping(value = "/courses")
-    List<Courses>getcourses(){ return coursesServices.getCourses();}
+    public ResponseEntity<CoursesDTO> courses(){
+    }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Courses> getCourseById(

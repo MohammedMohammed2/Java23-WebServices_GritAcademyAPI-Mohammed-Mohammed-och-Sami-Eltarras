@@ -17,7 +17,7 @@ public class StudentsController {
     @GetMapping(value = "/students")
     public List<StudentsDTO> allStudents() {
 
-        return studentsServices.getallStudents();
+        return studentsServices.getStudents();
 
     }
 

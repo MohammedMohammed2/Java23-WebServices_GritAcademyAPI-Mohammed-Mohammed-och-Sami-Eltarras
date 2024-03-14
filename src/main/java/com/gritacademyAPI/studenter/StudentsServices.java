@@ -21,11 +21,6 @@ public class StudentsServices {
         return studentsDTO;
     }
 
-    public List<StudentsDTO> getallStudents() {
-        List<StudentsDTO> studentsDTO = new ArrayList<>();
-        studentsRepository.findAll().forEach(students -> studentsDTO.add(this.mapsToDTO(students)));
-        return studentsDTO;
-    }
 
     public List<StudentsDTO> getCoursesForStudents(Long id) {
         Optional<Students> students = studentsRepository.findById(id).map(student -> {
