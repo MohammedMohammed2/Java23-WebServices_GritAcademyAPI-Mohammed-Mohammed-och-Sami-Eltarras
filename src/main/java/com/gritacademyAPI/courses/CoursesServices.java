@@ -21,12 +21,16 @@ public class CoursesServices {
 
       return coursesRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
   }
-    public ResponseEntity<Courses> getCourseById(Long id) {
-        Optional<Courses> courses = coursesRepository.findById(id);
-        if (courses.isEmpty()) {
-            throw new RuntimeException("Student not found");
-        }
-        return ResponseEntity.ok(courses.get());
+    public List<CoursesDTO> getCourseById(Long id) {
+
+        Optional<Courses> courses = coursesRepository.findStudentsById(id).map(course -> {
+            course.getStudents().size();
+            return course;
+        });
+        return courses.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+
     }
     public List<CoursesDTO> getStudentsByCourseName(String name) {
         Optional<Courses> courses = coursesRepository.findByNameContaining(name).map(course -> {
@@ -37,6 +41,17 @@ public class CoursesServices {
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
+
+    public List<CoursesDTO> getStudentsByCourseFullName(String name) {
+        Optional<Courses> courses = coursesRepository.findStudentsByName(name).map(course -> {
+            course.getStudents().size();
+            return course;
+        });
+        return courses.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
       public List<CoursesDTO> getStudentsByCourseDescription(String description) {
         Optional<Courses> courses = coursesRepository.findByDescriptionContaining(description).map(course -> {
             course.getStudents().size();

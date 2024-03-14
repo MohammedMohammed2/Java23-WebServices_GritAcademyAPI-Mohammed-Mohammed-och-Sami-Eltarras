@@ -22,15 +22,26 @@ public class CoursesController {
 
 
     @GetMapping(value = "/courses")
-    public ResponseEntity<CoursesDTO> courses(){
+    public List<CoursesDTO> courses(){
+        return coursesServices.getAllCourses();
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Courses> getCourseById(
+    @GetMapping(value = "courses/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CoursesDTO>> getCourseById(
             @PathVariable(value = "id") Long id
     ){
-        return coursesServices.getCourseById(id);
+        List<CoursesDTO> coursesDTOS = coursesServices.getCourseById(id);
+        return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
+
+    @GetMapping(value = "courses/fullCname/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CoursesDTO>> getStudentsByCourseFullName (
+            @PathVariable(value = "name")String name
+    ){
+        List<CoursesDTO> coursesDTOS = coursesServices.getStudentsByCourseName(name);
+        return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
+    }
+
 
     @GetMapping(value = "courses/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CoursesDTO>> getStudentsByCourseName (

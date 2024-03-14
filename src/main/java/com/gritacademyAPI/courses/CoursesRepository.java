@@ -14,5 +14,5 @@ public interface CoursesRepository extends JpaRepository<Courses,Long> {
     Optional<Courses> findByDescriptionContaining(String description);
 
     Optional<Courses> findStudentsByName(String name);
-
+    Optional<Courses> findStudentsById(Long id);
 }
