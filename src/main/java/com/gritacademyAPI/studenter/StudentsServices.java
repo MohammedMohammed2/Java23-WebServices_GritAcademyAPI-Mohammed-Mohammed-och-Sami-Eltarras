@@ -16,7 +16,14 @@ public class StudentsServices {
     @Autowired
     StudentsRepository studentsRepository;
 
-    List<Students> allStudents(){return studentsRepository.findAll();}
+
+
+    public List<StudentsDTO> getallStudents() {
+        List<StudentsDTO> studentsDTO = new ArrayList<>();
+        studentsRepository.findAll().forEach(students -> studentsDTO.add(this.mapsToDTO(students)));
+        return studentsDTO;
+    }
+
 
 
     public List<StudentsDTO> getStudents() {
@@ -35,24 +42,37 @@ public class StudentsServices {
                 .collect(Collectors.toList());
     }
 
+    public List<StudentsDTO> getCoursesbyfName(String fname) {
+        Optional<Students> students = studentsRepository.findCoursesByfName(fname).map(student -> {
+            student.getCourses().size();
+            return student;
+        });
+        return students.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
 
-    public ResponseEntity<List<Students>> getCoursesByfName(String fName) {
+    public List<StudentsDTO> getCoursesbylName(String lname) {
+        Optional<Students> students = studentsRepository.findCoursesBylName(lname).map(student -> {
+            student.getCourses().size();
+            return student;
+        });
+        return students.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+
+
+ /*   public ResponseEntity<List<Students>> getCoursesByfName(String fName) {
         List<Students> students = studentsRepository.findCoursesByfName(fName);
         if (students.isEmpty()){
             throw new RuntimeException("Student not found");
         }
         return ResponseEntity.ok(studentsRepository.findCoursesByfName(fName));
 
-    }
+    }*/
 
-    public ResponseEntity<List<Students>> getCoursesBylName(String lName) {
-        List<Students> students = studentsRepository.findCoursesBylName(lName);
-        if (students.isEmpty()){
-            throw new RuntimeException("Student not found");
-        }
-        return ResponseEntity.ok(studentsRepository.findCoursesBylName(lName));
-
-    }
     public ResponseEntity<List<Students>> getCoursesByTown(String town) {
         List<Students> students = studentsRepository.findCoursesByTown(town);
         if (students.isEmpty()){
@@ -82,6 +102,15 @@ public class StudentsServices {
                 .collect(Collectors.toList()));
         return dto;
     }
+    private StudentsDTO mapsToDTO (Students students) {
+        StudentsDTO dto = new StudentsDTO();
+        dto.setId(students.getId());
+        dto.setFName(students.getFName());
+        dto.setLName(students.getLName());
+        dto.setTown(students.getTown());
+        return dto;
+    }
+
 
 }
 
