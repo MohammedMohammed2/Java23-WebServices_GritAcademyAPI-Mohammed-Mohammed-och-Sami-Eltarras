@@ -21,7 +21,6 @@ public class StudentsServices {
         return studentsDTO;
     }
 
-
     public List<StudentsDTO> getCoursesForStudents(Long id) {
         Optional<Students> students = studentsRepository.findById(id).map(student -> {
             student.getCourses().size();
