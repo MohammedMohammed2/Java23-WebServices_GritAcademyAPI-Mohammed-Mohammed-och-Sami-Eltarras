@@ -18,14 +18,12 @@ public class StudentsCourses {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-  /*  @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "students_id", referencedColumnName = "id")
     private Students students;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "courses_id", referencedColumnName = "id")
     private Courses coursesId;
-
-   */
 
 }

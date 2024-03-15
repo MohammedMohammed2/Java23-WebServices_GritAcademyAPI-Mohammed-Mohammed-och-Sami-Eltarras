@@ -15,8 +15,4 @@ public class StudentsCoursesController {
     @Autowired
     StudentsCoursesServices studentsCoursesServices;
 
-    @GetMapping
-    public List<StudentsCourses> getStudentsCourses(){
-        return studentsCoursesServices.getStudentsCourses();
-    }
 }

@@ -26,9 +26,9 @@ public class StudentsController {
         return new ResponseEntity<>(allStudents, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/students/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/students/id", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity <List<StudentsDTO>> getCoursesForStudents(
-            @PathVariable(value = "id") Long id
+            @RequestParam(value = "id") Long id
     ){
         List<StudentsDTO> studentsDTOS = studentsServices.getCoursesForStudents(id);
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
@@ -56,5 +56,22 @@ public class StudentsController {
     ){
                 List<StudentsDTO> studentsDTOS = studentsServices.getCoursesByTown(town);
                 return new ResponseEntity<>(studentsDTOS,HttpStatus.OK);
+    }
+
+    /*@PostMapping(value = "createStudent")
+    public ResponseEntity<StudentsDTO> createStudent(Students student){
+        student = studentsServices.saveStudent(student);
+
+        return new ResponseEntity<>(student,HttpStatus.CREATED);
+    }
+
+
+     */
+    @PostMapping(value = "/removeStudent", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StudentsDTO>> removeStudent(
+            @RequestParam(value = "id") Long id
+    ){
+        studentsServices.removeStudentById(id);
+        return new ResponseEntity<>(studentsServices.getStudents(),HttpStatus.OK);
     }
 }

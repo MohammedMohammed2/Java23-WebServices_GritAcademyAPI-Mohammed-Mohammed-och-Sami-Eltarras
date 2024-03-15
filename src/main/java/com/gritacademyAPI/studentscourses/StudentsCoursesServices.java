@@ -12,5 +12,4 @@ public class StudentsCoursesServices {
     StudentsCoursesRepository studentCoursesRepository;
 
 
-    List<StudentsCourses> getStudentsCourses(){return studentCoursesRepository.findAll();}
 }
