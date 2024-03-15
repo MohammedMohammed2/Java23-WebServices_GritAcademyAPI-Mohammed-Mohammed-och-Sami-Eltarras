@@ -3,17 +3,13 @@ package com.gritacademyAPI.courses;
 import com.gritacademyAPI.studenter.Students;
 import com.gritacademyAPI.studenter.StudentsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class CoursesServices {
-
     @Autowired
     CoursesRepository coursesRepository;
 
@@ -23,7 +19,7 @@ public class CoursesServices {
   }
     public List<CoursesDTO> getCourseById(Long id) {
 
-        Optional<Courses> courses = coursesRepository.findStudentsById(id).map(course -> {
+        Optional<Courses> courses = coursesRepository.findById(id).map(course -> {
             course.getStudents().size();
             return course;
         });
@@ -33,23 +29,23 @@ public class CoursesServices {
 
     }
     public List<CoursesDTO> getStudentsByCourseFullName(String name) {
-        Optional<Courses> courses = coursesRepository.findStudentsByName(name).map(course -> {
-            course.getStudents().size();
-            return course;
-        });
+        List<Courses> courses = coursesRepository.findStudentsByName(name);
+
         return courses.stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
-    }
+        }
+
+
     public List<CoursesDTO> getStudentsByCourseName(String name) {
-        Optional<Courses> courses = coursesRepository.findByNameContaining(name);
+        List<Courses> courses = coursesRepository.findByNameContaining(name);
         return courses.stream()
                 .map(this::mapsToDTO)
                 .collect(Collectors.toList());
         }
 
       public List<CoursesDTO> getStudentsByCourseDescription(String description) {
-        Optional<Courses> courses = coursesRepository.findByDescriptionContaining(description);
+        List<Courses> courses = coursesRepository.findByDescriptionContaining(description);
           return courses.stream()
                   .map(this::mapsToDTO)
                   .collect(Collectors.toList());

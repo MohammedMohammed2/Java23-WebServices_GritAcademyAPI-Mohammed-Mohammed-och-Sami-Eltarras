@@ -10,8 +10,8 @@ import java.util.Optional;
 public interface StudentsRepository extends JpaRepository<Students,Long> {
 
 
-    Optional<Students> findCoursesByfName(String fName);
+    List<Students> findCoursesByfName(String fName);
 
-    Optional<Students> findCoursesBylName(String lName);
-    Optional <Students> findCoursesByTown(String town);
+    List<Students> findCoursesBylName(String lName);
+    List <Students> findCoursesByTown(String town);
 }

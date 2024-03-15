@@ -33,30 +33,22 @@ public class StudentsServices {
     }
 
     public List<StudentsDTO> getCoursesbyfName(String fname) {
-        Optional<Students> students = studentsRepository.findCoursesByfName(fname).map(student -> {
-            student.getCourses().size();
-            return student;
-        });
-        return students.stream()
+
+        return studentsRepository.findCoursesByfName(fname)
+                .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     public List<StudentsDTO> getCoursesbylName(String lname) {
-        Optional<Students> students = studentsRepository.findCoursesBylName(lname).map(student -> {
-            student.getCourses().size();
-            return student;
-        });
-        return students.stream()
+        return studentsRepository.findCoursesBylName(lname)
+                .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     public List<StudentsDTO> getCoursesByTown(String town) {
-        Optional<Students> students = studentsRepository.findCoursesByTown(town).map(student -> {
-            student.getCourses().size();
-            return student;
-        });
+        List<Students> students = studentsRepository.findCoursesByTown(town);
         return students.stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
