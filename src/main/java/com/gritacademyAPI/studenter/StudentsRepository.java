@@ -13,5 +13,5 @@ public interface StudentsRepository extends JpaRepository<Students,Long> {
     Optional<Students> findCoursesByfName(String fName);
 
     Optional<Students> findCoursesBylName(String lName);
-    List<Students> findAllByTownEquals(String town);
+    Optional <Students> findCoursesByTown(String town);
 }

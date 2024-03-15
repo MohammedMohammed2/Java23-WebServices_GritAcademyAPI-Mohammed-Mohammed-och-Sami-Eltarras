@@ -53,7 +53,10 @@ public class StudentsServices {
     }
 
     public List<StudentsDTO> getCoursesByTown(String town) {
-        List<Students> students = studentsRepository.findAllByTownEquals(town);
+        Optional<Students> students = studentsRepository.findCoursesByTown(town).map(student -> {
+            student.getCourses().size();
+            return student;
+        });
         return students.stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
