@@ -32,6 +32,7 @@ public class StudentsController {
             @RequestParam(value = "id") Long id
     ){
         List<StudentsDTO> studentsDTOS = studentsServices.getCoursesForStudents(id);
+
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
@@ -48,6 +49,12 @@ public class StudentsController {
             @PathVariable(value = "lName")String lName
     ){
         List<StudentsDTO> studentsDTOS = studentsServices.getCoursesbylName(lName);
+
+        if (studentsDTOS.isEmpty()){
+
+            return new ResponseEntity<>(null ,HttpStatus.OK);
+        }
+
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
@@ -64,10 +71,10 @@ public class StudentsController {
     public ResponseEntity<Students> createStudent(@RequestBody Students student){
 
         if (StringUtils.isBlank(student.getFName())){
-            throw new RuntimeException();
+            ResponseEntity.notFound();
         }
         if (StringUtils.isBlank(student.getLName())){
-            throw new RuntimeException();
+            throw new RuntimeException("Cant find LName");
         }
 
         studentsServices.saveStudents(student);

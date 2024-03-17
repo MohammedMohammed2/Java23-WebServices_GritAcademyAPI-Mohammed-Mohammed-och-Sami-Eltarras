@@ -12,12 +12,8 @@ import java.util.List;
 
 @RestController
 public class StudentsCoursesController {
-
     @Autowired
     StudentsCoursesServices studentsCoursesServices;
-
-    @Autowired
-    StudentsServices studentsServices;
 
     @PostMapping(value = "/addStudentCourse", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StudentsCourses> createStudentCourse (@RequestBody StudentsCourses studentCourse){
