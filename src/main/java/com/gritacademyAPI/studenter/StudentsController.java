@@ -51,8 +51,7 @@ public class StudentsController {
         List<StudentsDTO> studentsDTOS = studentsServices.getCoursesbylName(lName);
 
         if (studentsDTOS.isEmpty()){
-
-            return new ResponseEntity<>(null ,HttpStatus.OK);
+            throw new RuntimeException("Cant find last name");
         }
 
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
