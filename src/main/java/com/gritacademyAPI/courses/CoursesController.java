@@ -3,6 +3,7 @@ package com.gritacademyAPI.courses;
 import com.gritacademyAPI.studenter.Students;
 import com.gritacademyAPI.studenter.StudentsDTO;
 import com.gritacademyAPI.studenter.StudentsServices;
+import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,6 +28,11 @@ public class CoursesController {
             @PathVariable(value = "id") Long id
     ){
         List<CoursesDTO> coursesDTOS = coursesServices.getCourseById(id);
+
+        if (coursesDTOS.isEmpty()){
+            throw new RuntimeException("Cant find id");
+        }
+
         return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
 
@@ -35,6 +41,11 @@ public class CoursesController {
             @PathVariable(value = "name") String name
     ){
         List<CoursesDTO> coursesDTOS = coursesServices.getStudentsByCourseFullName(name);
+
+        if (coursesDTOS.isEmpty()){
+            throw new RuntimeException("Cant find name");
+        }
+
         return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
 
@@ -43,6 +54,11 @@ public class CoursesController {
             @PathVariable(value = "name")String name
     ){
         List<CoursesDTO> coursesDTOS = coursesServices.getStudentsByCourseName(name);
+
+        if (coursesDTOS.isEmpty()){
+            throw new RuntimeException("Cant find course");
+        }
+
         return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
 
@@ -51,6 +67,11 @@ public class CoursesController {
             @PathVariable(value = "description") String description
     ){
         List<CoursesDTO> coursesDTOS = coursesServices.getStudentsByCourseDescription(description);
+
+        if (coursesDTOS.isEmpty()){
+            throw new RuntimeException("Cant find description");
+        }
+
         return new ResponseEntity<>(coursesDTOS, HttpStatus.OK);
     }
 
@@ -59,7 +80,11 @@ public class CoursesController {
 
         coursesServices.addCourse(course);
 
-        return ResponseEntity.ok().build();
+        if (StringUtils.isBlank(course.getName())){
+            throw new RuntimeException("Cant find course name");
+        }
+
+        return new ResponseEntity<>(course, HttpStatus.OK);
     }
 
     @PostMapping(value = "/removeCourse/{id}")

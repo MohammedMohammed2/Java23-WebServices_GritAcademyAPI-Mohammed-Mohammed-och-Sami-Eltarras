@@ -24,6 +24,7 @@ public class StudentsController {
     @GetMapping(value = "/studentsCourses", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity <List<StudentsDTO>> getStudentsCourses(){
         List<StudentsDTO> allStudents = studentsServices.getStudentsCourses();
+
         return new ResponseEntity<>(allStudents, HttpStatus.OK);
     }
 
@@ -33,6 +34,10 @@ public class StudentsController {
     ){
         List<StudentsDTO> studentsDTOS = studentsServices.getCoursesForStudents(id);
 
+        if (studentsDTOS.isEmpty()){
+            throw new RuntimeException("Cant find id");
+        }
+
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
@@ -41,6 +46,11 @@ public class StudentsController {
             @PathVariable(value = "fName")String fName
     ){
         List<StudentsDTO> studentsDTOS = studentsServices.getCoursesbyfName(fName);
+
+        if (studentsDTOS.isEmpty()){
+            throw new RuntimeException("Cant find first name");
+        }
+
         return new ResponseEntity<>(studentsDTOS, HttpStatus.OK);
     }
 
@@ -61,23 +71,29 @@ public class StudentsController {
     public ResponseEntity<List<StudentsDTO>> getCoursesTown (
             @PathVariable(value = "town")String town
     ){
-                List<StudentsDTO> studentsDTOS = studentsServices.getCoursesByTown(town);
-                return new ResponseEntity<>(studentsDTOS,HttpStatus.OK);
+            List<StudentsDTO> studentsDTOS = studentsServices.getCoursesByTown(town);
+
+        if (studentsDTOS.isEmpty()){
+            throw new RuntimeException("Cant find town");
+        }
+
+            return new ResponseEntity<>(studentsDTOS,HttpStatus.OK);
     }
 
 
     @PostMapping(value = "/createStudent")
     public ResponseEntity<Students> createStudent(@RequestBody Students student){
 
+        studentsServices.saveStudents(student);
+
         if (StringUtils.isBlank(student.getFName())){
-            ResponseEntity.notFound();
+            throw new RuntimeException("Missing first name");
         }
         if (StringUtils.isBlank(student.getLName())){
-            throw new RuntimeException("Cant find LName");
+            throw new RuntimeException("Missing last name");
         }
 
-        studentsServices.saveStudents(student);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @PostMapping(value = "/removeStudent/{id}")
@@ -85,6 +101,8 @@ public class StudentsController {
             @PathVariable(value = "id") Long id
     ){
         studentsServices.removeStudentsById(id);
+
+
         return new ResponseEntity<>(studentsServices.getStudents(), HttpStatus.OK);
     }
 }
