@@ -6,8 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentsCoursesRepository extends JpaRepository<StudentsCourses, Long> {
 
-   /* @Override
-    <S extends StudentsCourses> S save(S entity);
-    */
 
 }

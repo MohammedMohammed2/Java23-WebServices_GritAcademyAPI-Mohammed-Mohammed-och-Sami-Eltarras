@@ -10,7 +10,10 @@ import java.util.Set;
 
 @Entity(name = "students_courses")
 @Table(name = "students_courses")
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class StudentsCourses {
 
     @Id
@@ -20,7 +23,7 @@ public class StudentsCourses {
 
     @ManyToOne
     @JoinColumn(name = "students_id", referencedColumnName = "id")
-    private Students students;
+    private Students studentsId;
 
     @ManyToOne
     @JoinColumn(name = "courses_id", referencedColumnName = "id")

@@ -11,5 +11,11 @@ public class StudentsCoursesServices {
     @Autowired
     StudentsCoursesRepository studentCoursesRepository;
 
+    public StudentsCourses addStudentCourse (StudentsCourses studentCourse){
+        return studentCoursesRepository.save(studentCourse);
+    }
 
+    public void removeStudentCourse(Long id){
+        studentCoursesRepository.deleteById(id);
+    }
 }

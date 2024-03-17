@@ -51,6 +51,14 @@ public class CoursesServices {
                   .collect(Collectors.toList());
         }
 
+    public Courses addCourse (Courses course){
+        return coursesRepository.save(course);
+    }
+
+    public void removeCourse (Long id){
+        coursesRepository.deleteById(id);
+    }
+
     private StudentsDTO mapToDTO(Students students){
         StudentsDTO dto = new StudentsDTO();
         dto.setId(students.getId());

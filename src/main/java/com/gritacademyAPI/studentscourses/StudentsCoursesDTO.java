@@ -1,5 +1,8 @@
 package com.gritacademyAPI.studentscourses;
 
+import lombok.Data;
+
+@Data
 public class StudentsCoursesDTO {
 
     private Long id;

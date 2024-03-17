@@ -1,6 +1,7 @@
 package com.gritacademyAPI.studenter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.micrometer.common.util.StringUtils;
 import org.hibernate.mapping.TableOwner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,20 +59,26 @@ public class StudentsController {
                 return new ResponseEntity<>(studentsDTOS,HttpStatus.OK);
     }
 
-    /*@PostMapping(value = "createStudent")
-    public ResponseEntity<StudentsDTO> createStudent(Students student){
-        student = studentsServices.saveStudent(student);
 
-        return new ResponseEntity<>(student,HttpStatus.CREATED);
+    @PostMapping(value = "/createStudent")
+    public ResponseEntity<Students> createStudent(@RequestBody Students student){
+
+        if (StringUtils.isBlank(student.getFName())){
+            throw new RuntimeException();
+        }
+        if (StringUtils.isBlank(student.getLName())){
+            throw new RuntimeException();
+        }
+
+        studentsServices.saveStudents(student);
+        return ResponseEntity.ok().build();
     }
 
-
-     */
-    @PostMapping(value = "/removeStudent", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/removeStudent/{id}")
     public ResponseEntity<List<StudentsDTO>> removeStudent(
-            @RequestParam(value = "id") Long id
+            @PathVariable(value = "id") Long id
     ){
-        studentsServices.removeStudentById(id);
-        return new ResponseEntity<>(studentsServices.getStudents(),HttpStatus.OK);
+        studentsServices.removeStudentsById(id);
+        return new ResponseEntity<>(studentsServices.getStudents(), HttpStatus.OK);
     }
 }
