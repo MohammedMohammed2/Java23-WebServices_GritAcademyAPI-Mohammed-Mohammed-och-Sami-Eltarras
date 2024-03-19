@@ -1,7 +1,4 @@
 package com.gritacademyAPI.studentscourses;
-
-import com.gritacademyAPI.studenter.Students;
-import com.gritacademyAPI.studenter.StudentsServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,9 +11,12 @@ import java.util.List;
 public class StudentsCoursesController {
     @Autowired
     StudentsCoursesServices studentsCoursesServices;
+    @Autowired
+    StudentsCoursesRepository studentsCoursesRepository;
 
     @PostMapping(value = "/addStudentCourse", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StudentsCourses> createStudentCourse (@RequestBody StudentsCourses studentCourse){
+
         studentsCoursesServices.addStudentCourse(studentCourse);
 
         return new ResponseEntity<>(studentCourse, HttpStatus.OK);
