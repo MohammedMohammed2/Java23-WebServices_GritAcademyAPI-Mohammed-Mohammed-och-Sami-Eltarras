@@ -26,8 +26,13 @@ public class StudentsCoursesController {
     public ResponseEntity <List<StudentsCoursesDTO>> removeStudentCourse(
             @PathVariable(name = "id") Long id
     ){
-        studentsCoursesServices.removeStudentCourse(id);
+        if (id != null ) {
+            studentsCoursesServices.removeStudentCourse(id);
 
-        return ResponseEntity.ok().build();
+            return ResponseEntity.ok().build();
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 }
